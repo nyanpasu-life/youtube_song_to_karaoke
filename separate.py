@@ -28,10 +28,7 @@ def save_tensor_as_mp3(tensor, save_path):
     audio.export(save_path, format="mp3")
 
 
-def separate_audio(load_dir, audio_path, save_dir):
-
-    load_path = os.path.join(load_dir, audio_path)
-    audio_name = audio_path.split(".")[0]
+def separate_audio(load_path, audio_path, save_dir):
 
     # 1) 오디오 파일 로드
     audio, rate = torchaudio.load(load_path)
@@ -69,6 +66,9 @@ if __name__=="__main__":
 
     load_dir = 'music_downloads'
     save_dir = "tmp"
-    for f in os.listdir(load_dir):
-        if f.endswith('.mp3'):
-            separate_audio(load_dir, f, save_dir)
+    for root, dirs, files in os.walk(load_dir):
+        for f in files:
+            if f.endswith('.mp3'):
+                full_path = os.path.join(root, f)
+                
+                separate_audio(full_path, f, save_dir)

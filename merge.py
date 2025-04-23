@@ -82,18 +82,25 @@ if __name__=="__main__":
 
     vocal_midi_dir = 'tmp/vocal_midi'
     inst_dir = "tmp/inst"
-    for f in os.listdir(vocal_midi_dir):
-        if f.endswith('.mid'):
-            midi_path = os.path.join(vocal_midi_dir, f)
-            source_name = Path(f).stem
+    for root, dirs, files in os.walk("music_downloads"):
+        for f in files:
+            if f.endswith(".mp3"):
+                relative_path = os.path.relpath(root, "music_downloads") 
+                target_folder = os.path.join("res", relative_path)
+                os.makedirs(target_folder, exist_ok=True)
 
-            convert_to_synth_lead_pretty(midi_path)
+                f_midi = f[:-4] + ".mid"
+                midi_path = os.path.join(vocal_midi_dir, f_midi)
+                source_name = Path(f).stem
 
-            convert_midi_to_mp3()
+                convert_to_synth_lead_pretty(midi_path)
+                convert_midi_to_mp3()
 
-            merge_vocal_and_inst("tmp/tmpvocalconvert.mp3", f"tmp/inst/{source_name}.mp3", f"res/{source_name}_노래방용.mp3")
-    
-    os.remove("tmp/tmpvocalconvert.midi")
+                inst_path = os.path.join(inst_dir, f"{source_name}.mp3")
+                out_path = os.path.join(target_folder, f"{source_name}_노래방용.mp3")
+                merge_vocal_and_inst("tmp/tmpvocalconvert.mp3", inst_path, out_path)
+
+    os.remove("tmp/tmpvocalconvert.mid")
     os.remove("tmp/tmpvocalconvert.wav")
     os.remove("tmp/tmpvocalconvert.mp3")
 

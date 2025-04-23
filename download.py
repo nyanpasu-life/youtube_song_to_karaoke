@@ -37,7 +37,7 @@ def download_youtube_playlist_as_mp3(playlist_url, output_path='.'):
     """
     ydl_opts = {
         'format': 'bestaudio/best',
-        'outtmpl': f'{output_path}/%(title)s.%(ext)s',
+        'outtmpl': f'{output_path}/%(playlist_title)s/%(title)s.%(ext)s',
         'postprocessors': [{
             'key': 'FFmpegExtractAudio',
             'preferredcodec': 'mp3',
