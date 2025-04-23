@@ -1,5 +1,6 @@
 import yt_dlp
 import os
+import sys
 
 def download_youtube_music_as_mp3(url, output_path='.'):
     """
@@ -49,14 +50,16 @@ def download_youtube_playlist_as_mp3(playlist_url, output_path='.'):
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         ydl.download(playlist_url)
 
-# 예시 사용
 if __name__ == "__main__":
+    # Check if the playlist URL is provided as the first argument
+    if len(sys.argv) < 2:
+        print("Please provide the YouTube playlist URL as the first argument.")
+        sys.exit(1)
+
+    playlist_url = sys.argv[1]
 
     for folder in ["music_downloads"]:
         if not os.path.exists(folder):
             os.makedirs(folder)
 
-    download_youtube_playlist_as_mp3(
-        "https://www.youtube.com/watch?v=owVdPiQ8Y3M&list=PLIDQhxxi_h4BXIzSkfbhIBHUtT66GhBkq", 
-        "./music_downloads"
-    )
+    download_youtube_playlist_as_mp3(playlist_url, "./music_downloads")
