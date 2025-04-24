@@ -60,7 +60,7 @@ def separate_audio(load_path, audio_path, save_dir):
 
 
 if __name__=="__main__":
-    for folder in ["tmp/vocal", "tmp/inst", "tmp/vocal_midi"]:
+    for folder in ["tmp/vocal", "tmp/inst"]:
         if not os.path.exists(folder):
             os.makedirs(folder)
 

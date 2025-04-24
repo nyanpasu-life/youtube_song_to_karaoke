@@ -2,3 +2,16 @@ __pycache__/
 music_downloads/
 tmp/
 res/
+
+# Ignore everything under amt/
+amt/*
+
+# But don't ignore the src directory
+!amt/src/
+
+# Don't ignore the specific file
+!amt/src/run_amt.py
+
+# Optional: if there are other files under src you *do* want to ignore
+amt/src/*
+!amt/src/run_amt.py

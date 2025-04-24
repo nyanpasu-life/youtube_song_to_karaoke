@@ -1,0 +1,6 @@
+yt_dlp
+openunmix
+pydub
+fluidsynth
+
+# amt -> YourMT3+ Demo 2024.ipynb를 참조하여 수동으로 amt/ 하위 폴더에 설치.
